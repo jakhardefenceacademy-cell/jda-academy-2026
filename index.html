@@ -329,7 +329,7 @@ input,select,textarea,button{max-width:100%;box-sizing:border-box}
 <button type="button" data-page="home">🏠 Home Dashboard</button><button type="button" data-page="director">👔 Director Management</button><button type="button" data-page="students">👨‍🎓 Student Management</button><button type="button" data-page="courses">📚 Courses</button><button type="button" data-page="blackboard">🧑‍🏫 Teacher Absent • Mobile Blackboard</button><button type="button" data-page="competition">🏆 Competition / Mock Test</button><button type="button" data-page="study">📖 Study Material</button><button type="button" data-page="oneline">⚡ One-Liner + Daily GK</button><button type="button" data-page="coreQA">📚 Mathematics + Science + Reasoning — Questions & Answers</button><button type="button" data-page="physical">🏃 Physical Training</button><button type="button" data-page="reports">📊 Results & Performance</button><button type="button" data-page="gallery">📸 Academy Media</button><button type="button" data-page="notices">📢 Notice & Communication</button><button type="button" data-page="fees">💰 Fees Management</button><button type="button" data-page="staff">👨‍🏫 Staff Management</button><button type="button" data-page="timetable">📅 Timetable</button><button type="button" data-page="backup">☁️ Backup + Update System</button><button type="button" data-page="patchManager">🛡️ Secure Patch Manager</button><button type="button" data-page="storage">🗄️ 1 TB Cloud Storage</button><button type="button" data-page="devices">📱 Every Device</button><button type="button" data-page="loginSystem">🔐 Login System</button><button type="button" data-page="gmailDrive">☁️ Gmail + Google Drive</button><button type="button" data-page="vacancy">💼 Vacancy Update</button><button type="button" data-page="newspaper">📰 Newspaper</button><button type="button" data-page="control">⚙️ Admin Control Centre</button><button type="button" data-page="location">📍 Location Share</button>
 </nav>
 <div class="updatebar"><span class="online" id="netStatus"><span class="dot"></span>Online / Internet Connected</span> <span class="tag" id="syncStatus">☁️ Cloud Sync: Ready / not yet synced</span>
-<span id="appVersion">JDA ACADEMY FINAL 2026 • V145 • Role-Based Student + Staff Login • Admin Permission • AUTO + MANUAL • OFFLINE + ONLINE READY</span>
+<span id="appVersion">JDA ACADEMY FINAL 2026 • V151 • V149 FULL FEATURES + SECURE UPDATE + BACKUP</span>
 <div class="navControls"><button class="btn dark" id="globalBack" title="Back: home" type="button">← Back</button><button class="btn blue" id="globalHome" type="button">⌂ Home</button><button class="btn dark" id="globalForward" title="Forward" type="button">Forward →</button><button class="btn gold" id="updateApp" type="button">↻ Check Update</button></div></div>
 </header>
 <main>
@@ -618,12 +618,30 @@ input,select,textarea,button{max-width:100%;box-sizing:border-box}
 <div class="quickGrid"><button class="btn green" onclick="createFullBackup()">⬇️ Create Full Backup</button><button class="btn blue" onclick="document.getElementById('restoreBtn').click()">⬆️ Restore Backup</button><button class="btn dark" onclick="showPage('settings')">⚙️ Sync Settings</button><button class="btn gold" onclick="location.reload()">🔄 Reload App</button></div>
 <div class="notice">Full backup includes app data and uploaded media when browser storage permits. For multi-device automatic cloud sync, configure a real backend endpoint in Settings.</div></div>
 <div class="card"><h3>☁️ Cloud Sync</h3><div id="v12SyncStatus">☁️ Cloud Sync: Ready / not yet synced</div><div class="actions"><button class="btn green" onclick="syncNow()">☁️ Sync Now</button><button class="btn blue" onclick="pullCloud()">⬇️ Load Cloud</button></div></div>
+
+<div class="card" id="jdaV150UpdateManager">
+<h3>🔐 V151 Secure Update Manager</h3>
+<div class="notice">Internet होने पर release manifest check करें। Update से पहले local snapshot बनाया जा सकता है। नया service-worker उपलब्ध होने पर app reload करके latest hosted files लेगी।</div>
+<div class="form">
+<div><label>Current Version</label><input id="jdaV150Current" readonly></div>
+<div><label>Release Manifest URL</label><input id="jdaV150ManifestUrl" placeholder="https://.../update-manifest.json"></div>
+<div class="full"><label class="checkrow"><input type="checkbox" id="jdaV150AutoCheck" checked> Internet आने पर automatic update check</label></div>
+</div>
+<div class="actions">
+<button class="btn blue" id="jdaV150Check" type="button">🔎 Check New Update</button>
+<button class="btn green" id="jdaV150Apply" type="button" disabled>⬆️ Apply / Reload Update</button>
+<button class="btn gold" id="jdaV150Backup" type="button">💾 Backup Before Update</button>
+</div>
+<div class="notice" id="jdaV150Status">Ready — local data safe. First configure a HTTPS manifest URL for remote version checking.</div>
+<div class="notice" id="jdaV150Changelog" style="display:none"></div>
+</div>
+
 </section>
 <section class="page" id="storage"><div class="pageBack"><button class="btn dark" onclick="goBack()" type="button">← Back</button></div><div class="card"><h2>🗄️ JDA Cloud Storage — 1 TB Ready</h2><div class="notice"><b>Target:</b> up to <b>1 TB cloud storage</b> • <b>1,00,000+ Questions & Answers</b> • <b>1,00,000+ Photos/Videos</b>. The app remains offline-capable; when a real cloud backend is configured, Internet connection triggers automatic sync. <b>1 TB is a cloud plan target, not browser storage.</b></div><div class="statGrid"><div class="miniStat">Questions<b id="cloudQuestionCount">0</b><small>/ 1,00,000 target</small></div><div class="miniStat">Students<b id="cloudStudentCount">0</b></div><div class="miniStat">Staff<b id="cloudStaffCount">0</b></div><div class="miniStat">Media in Local DB<b id="cloudMediaCount">0</b><small>/ 1,00,000 target</small></div><div class="miniStat">Browser Storage<b id="cloudBrowserStorage">Checking…</b></div><div class="miniStat">Cloud Status<b id="cloudStorageStatus">Not configured</b></div></div></div><div class="card"><h3>🔄 Automatic + Manual Cloud Control</h3><div class="form"><div><label>Storage Mode</label><select id="cloudStorageMode"><option value="both">Automatic + Manual</option><option value="auto">Automatic</option><option value="manual">Manual</option></select></div><div><label>Cloud Backend Endpoint</label><input id="cloudStorageEndpoint" placeholder="https://your-backend.example/api" type="url"/></div><div><label>Cloud Security Token</label><input id="cloudStorageToken" type="password" autocomplete="off"/></div><div><label>Storage Bucket / Folder</label><input id="cloudStorageFolder" value="jda-academy"/></div></div><div class="actions"><button class="btn green" id="cloudSaveConfig">💾 Save Cloud Settings</button><button class="btn blue" id="cloudSyncNow">☁️ Sync Now</button><button class="btn gold" id="cloudPullNow">⬇️ Load Cloud</button><button class="btn dark" id="cloudSelfTest">🧪 Self Test</button></div><div class="notice" id="cloudStorageMessage">Local/offline storage is active. Configure a cloud backend for central multi-device storage.</div></div><div class="card"><h3>🔥 Firebase Cloud Storage (Photos / Videos / PDFs)</h3><div class="notice">If Firebase Storage is configured in Settings, this uploader can send large media files to cloud storage instead of keeping everything only inside the phone/browser. A paid/billed Firebase storage plan is required for a 1 TB allocation.</div><div class="form"><div><label>Media Type</label><select id="cloudMediaType"><option value="photos">Photos</option><option value="videos">Videos</option><option value="documents">Documents / PDFs</option></select></div><div><label>Select Files</label><input id="cloudMediaFiles" type="file" multiple accept="image/*,video/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt"/></div></div><div class="actions"><button class="btn green" id="cloudUploadMedia">☁️ Upload to Cloud</button></div><div id="cloudUploadList" class="notice">No cloud uploads yet.</div></div><div class="card"><h3>🛡️ Reliability / Safety</h3><div class="grid2"><div class="ok">✅ Local-first: data saves on the device before cloud sync.</div><div class="ok">✅ Automatic retry when Internet returns.</div><div class="ok">✅ Manual backup and restore remain available.</div><div class="ok">✅ Cloud credentials are kept in browser settings; never publish secret server keys in HTML.</div></div><div class="warn" style="margin-top:12px"><b>Important:</b> The HTML app cannot create a 1 TB cloud account by itself. The final 1 TB capacity comes from the cloud provider account/billing and its configured bucket/database. Until that is connected, the software safely uses offline/local storage.</div></div></section>
 <section class="page" id="patchManager">
 <div class="pageBack"><button class="btn dark" onclick="goBack()" type="button">← Back</button></div>
 <div class="card"><h2>🛡️ JDA Secure Patch & Auto Update Manager</h2>
-<div class="notice"><b>Current:</b> <span id="patchCurrentVersion">V149</span> • Internet आने पर update check किया जा सकता है। Update से पहले local backup बनाया जाएगा। केवल HTTPS hosting पर PWA/service-worker update सुरक्षित रूप से लागू होगा।</div>
+<div class="notice"><b>Current:</b> <span id="patchCurrentVersion">V151</span> • Internet आने पर update check किया जा सकता है। Update से पहले local backup बनाया जाएगा। केवल HTTPS hosting पर PWA/service-worker update सुरक्षित रूप से लागू होगा।</div>
 <div class="form"><div><label>Patch Manifest URL (HTTPS JSON)</label><input id="patchManifestUrl" type="url" placeholder="https://your-domain.example/jda-update.json" autocomplete="off"/></div><div><label>Automatic Update</label><select id="patchAutoMode"><option value="auto">Automatic check when Internet connects</option><option value="manual">Manual only</option></select></div><div><label>Require Admin Approval</label><select id="patchRequireAdmin"><option value="yes">Yes — recommended</option><option value="no">No</option></select></div></div>
 <div class="actions"><button class="btn green" id="patchSave">💾 Save Update Settings</button><button class="btn gold" id="patchCheck">🔎 Check New Patch</button><button class="btn blue" id="patchApply">⬇️ Apply Available Patch</button><button class="btn dark" id="patchBackup">💾 Backup Before Update</button><button class="btn red" id="patchRollback">↩️ Rollback Info</button></div>
 <div class="notice" id="patchStatus">No update check performed.</div>
@@ -841,7 +859,7 @@ function openWhatsApp(number, message='') {
   return false;
 }
 
-const DB_NAME='JDA_V5_DB',STORE='media',DATA_KEY='JDA_V5_DATA',APP_VERSION='V149 • SECURE AUTO UPDATE • CLOUD SYNC • PASSWORD SECURITY';
+const DB_NAME='JDA_V5_DB',STORE='media',DATA_KEY='JDA_V5_DATA',APP_VERSION='V151 • V149 FULL FEATURES + SECURE UPDATE + BACKUP';
 const SYNC_KEY='JDA_CLOUD_SYNC_CONFIG',SYNC_META_KEY='JDA_CLOUD_SYNC_META';
 const $=id=>document.getElementById(id);
 const blank={students:[],notices:[],tests:[],materials:[],attendance:{},selected:[],onlineClasses:[],vacancies:[],settings:{directorPhoto:'',backgroundPhoto:'',backgroundPhotoId:''},installments:[]};
@@ -4727,6 +4745,65 @@ async function loadStorage(){if(!window.firebase){await new Promise((res,rej)=>{
 async function upload(){const files=q('cloudMediaFiles')?.files;if(!files||!files.length)return alert('पहले files select करें.');const type=q('cloudMediaType')?.value||'photos';const out=q('cloudUploadList');try{const st=await loadStorage();let html='';for(let i=0;i<files.length;i++){const f=files[i],safe=f.name.replace(/[^a-zA-Z0-9._-]/g,'_'),path='jda-academy/'+type+'/'+new Date().toISOString().slice(0,10)+'/'+Date.now()+'-'+i+'-'+safe,ref=st.ref().child(path);await ref.put(f,{contentType:f.type||'application/octet-stream'});const url=await ref.getDownloadURL();html+='<div>✅ '+esc(f.name)+' — '+fmtBytes(f.size)+' <a href="'+url+'" target="_blank" rel="noopener">Open</a></div>'}out.innerHTML=html;setMsg('✅ Cloud media upload complete.',true);refresh()}catch(e){setMsg('⚠️ Upload failed: '+(e.message||e),false)}}
 function selfTest(){const c=readCfg(),items=[];items.push(c.endpoint?'Cloud endpoint configured':'Cloud endpoint not configured');try{const f=JSON.parse(localStorage.getItem('JDA_FIREBASE_CONFIG')||'{}');items.push(f.storageBucket?'Firebase Storage bucket configured':'Firebase Storage bucket not configured')}catch(e){items.push('Firebase config not readable')}items.push(navigator.onLine?'Internet: online':'Internet: offline');alert('JDA Cloud Self Test\n\n• '+items.join('\n• '));refresh()}
 window.JDA_V145_STORAGE={refresh,save,sync,pull,upload,selfTest};document.addEventListener('DOMContentLoaded',function(){q('cloudSaveConfig')?.addEventListener('click',save);q('cloudSyncNow')?.addEventListener('click',sync);q('cloudPullNow')?.addEventListener('click',pull);q('cloudUploadMedia')?.addEventListener('click',upload);q('cloudSelfTest')?.addEventListener('click',selfTest);refresh();window.addEventListener('online',refresh)});
+})();
+</script>
+<script id="JDA_V150_SECURE_UPDATE_MANAGER">
+(function(){
+'use strict';
+const KEY_URL='JDA_V150_UPDATE_MANIFEST_URL';
+const KEY_AUTO='JDA_V150_AUTO_CHECK';
+const KEY_PENDING='JDA_V150_PENDING_RELEASE';
+const $=id=>document.getElementById(id);
+function current(){return (typeof APP_VERSION!=='undefined'?String(APP_VERSION):'V150').split('•')[0].trim();}
+function setStatus(t){const e=$('jdaV150Status');if(e)e.textContent=t;}
+function manifestUrl(){return localStorage.getItem(KEY_URL)||('./update-manifest.json');}
+function semver(v){const m=String(v||'').match(/(\d+)(?:\.(\d+))?(?:\.(\d+))?/);return m?[+m[1],+(m[2]||0),+(m[3]||0)]:[0,0,0]}
+function newer(a,b){const x=semver(a),y=semver(b);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i]}return false}
+async function check(silent){
+ if(!navigator.onLine){if(!silent)setStatus('📴 Internet नहीं है — offline mode जारी है।');return null}
+ const url=manifestUrl(); if($('jdaV150ManifestUrl'))$('jdaV150ManifestUrl').value=url;
+ try{
+   if(!silent)setStatus('🌐 Release manifest check हो रहा है…');
+   const r=await fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}}); if(!r.ok)throw new Error('HTTP '+r.status);
+   const m=await r.json(); const remote=String(m.version||''); if(!remote)throw new Error('version missing');
+   const isNew=newer(remote,current());
+   localStorage.setItem(KEY_PENDING,JSON.stringify({version:remote,checkedAt:new Date().toISOString(),manifest:m}));
+   const apply=$('jdaV150Apply'); if(apply)apply.disabled=!isNew;
+   const c=$('jdaV150Changelog'); if(c){c.style.display='block';c.innerHTML='<b>Release:</b> '+remote+'<br><b>Changelog:</b> '+String(m.changelog||'No changelog provided.')+'<br><b>Status:</b> '+(isNew?'🟢 New update available':'✅ You are on the latest release');}
+   setStatus(isNew?'🟢 New version '+remote+' available. Backup first, then Apply / Reload Update दबाएँ.':'✅ No newer release found. Current '+current()+' is up to date.');
+   return {isNew,manifest:m};
+ }catch(e){if(!silent)setStatus('⚠️ Update check failed: '+e.message+' — local/offline mode जारी है।');return null}
+}
+async function backup(){try{if(typeof createFullBackup==='function'){await createFullBackup();setStatus('✅ Backup created before update.');return true}setStatus('⚠️ Full backup function उपलब्ध नहीं है.');return false}catch(e){setStatus('⚠️ Backup failed: '+e.message);return false}}
+async function apply(){
+ const raw=localStorage.getItem(KEY_PENDING);let p=null;try{p=JSON.parse(raw||'null')}catch(e){}
+ if(!p||!p.manifest){setStatus('पहले Check New Update करें.');return}
+ if(!confirm('Update से पहले local backup बनाना है। Continue?'))return;
+ if(!(await backup()))return;
+ try{
+   if('serviceWorker' in navigator){
+     const regs=await navigator.serviceWorker.getRegistrations();
+     if(!regs.length) await navigator.serviceWorker.register('./sw.js');
+     const reg=await navigator.serviceWorker.ready; await reg.update();
+     if(reg.waiting){reg.waiting.postMessage({type:'SKIP_WAITING'});}
+   }
+   setStatus('🔄 Update apply किया जा रहा है… app reload होगी.');
+   setTimeout(()=>location.reload(),900);
+ }catch(e){setStatus('⚠️ Update apply नहीं हो सका: '+e.message+'. Backup सुरक्षित है.');}
+}
+function init(){
+ const c=$('jdaV150Current');if(c)c.value=current();
+ const u=$('jdaV150ManifestUrl');if(u)u.value=manifestUrl();
+ const a=$('jdaV150AutoCheck');if(a)a.checked=localStorage.getItem(KEY_AUTO)!=='off';
+ $('jdaV150Check')?.addEventListener('click',()=>check(false));
+ $('jdaV150Apply')?.addEventListener('click',apply);
+ $('jdaV150Backup')?.addEventListener('click',backup);
+ u?.addEventListener('change',()=>localStorage.setItem(KEY_URL,u.value.trim()||'./update-manifest.json'));
+ a?.addEventListener('change',()=>localStorage.setItem(KEY_AUTO,a.checked?'on':'off'));
+ if(a?.checked && navigator.onLine)setTimeout(()=>check(true),1500);
+ window.addEventListener('online',()=>{if(localStorage.getItem(KEY_AUTO)!=='off')setTimeout(()=>check(true),1500)});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
 </body></html>
