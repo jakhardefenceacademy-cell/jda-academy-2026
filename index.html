@@ -329,7 +329,7 @@ input,select,textarea,button{max-width:100%;box-sizing:border-box}
 <button type="button" data-page="home">🏠 Home Dashboard</button><button type="button" data-page="director">👔 Director Management</button><button type="button" data-page="students">👨‍🎓 Student Management</button><button type="button" data-page="courses">📚 Courses</button><button type="button" data-page="blackboard">🧑‍🏫 Teacher Absent • Mobile Blackboard</button><button type="button" data-page="competition">🏆 Competition / Mock Test</button><button type="button" data-page="study">📖 Study Material</button><button type="button" data-page="oneline">⚡ One-Liner + Daily GK</button><button type="button" data-page="coreQA">📚 Mathematics + Science + Reasoning — Questions & Answers</button><button type="button" data-page="physical">🏃 Physical Training</button><button type="button" data-page="reports">📊 Results & Performance</button><button type="button" data-page="gallery">📸 Academy Media</button><button type="button" data-page="notices">📢 Notice & Communication</button><button type="button" data-page="fees">💰 Fees Management</button><button type="button" data-page="staff">👨‍🏫 Staff Management</button><button type="button" data-page="timetable">📅 Timetable</button><button type="button" data-page="backup">☁️ Backup + Update System</button><button type="button" data-page="patchManager">🛡️ Secure Patch Manager</button><button type="button" data-page="storage">🗄️ 1 TB Cloud Storage</button><button type="button" data-page="devices">📱 Every Device</button><button type="button" data-page="loginSystem">🔐 Login System</button><button type="button" data-page="gmailDrive">☁️ Gmail + Google Drive</button><button type="button" data-page="vacancy">💼 Vacancy Update</button><button type="button" data-page="newspaper">📰 Newspaper</button><button type="button" data-page="control">⚙️ Admin Control Centre</button><button type="button" data-page="location">📍 Location Share</button>
 </nav>
 <div class="updatebar"><span class="online" id="netStatus"><span class="dot"></span>Online / Internet Connected</span> <span class="tag" id="syncStatus">☁️ Cloud Sync: Ready / not yet synced</span>
-<span id="appVersion">JDA ACADEMY FINAL 2026 • V151 • V149 FULL FEATURES + SECURE UPDATE + BACKUP</span>
+<span id="appVersion">JDA ACADEMY FINAL 2026 • V152 • V149 FULL FEATURES + SECURE UPDATE + BACKUP • COMPETITION START FIX</span>
 <div class="navControls"><button class="btn dark" id="globalBack" title="Back: home" type="button">← Back</button><button class="btn blue" id="globalHome" type="button">⌂ Home</button><button class="btn dark" id="globalForward" title="Forward" type="button">Forward →</button><button class="btn gold" id="updateApp" type="button">↻ Check Update</button></div></div>
 </header>
 <main>
@@ -620,7 +620,7 @@ input,select,textarea,button{max-width:100%;box-sizing:border-box}
 <div class="card"><h3>☁️ Cloud Sync</h3><div id="v12SyncStatus">☁️ Cloud Sync: Ready / not yet synced</div><div class="actions"><button class="btn green" onclick="syncNow()">☁️ Sync Now</button><button class="btn blue" onclick="pullCloud()">⬇️ Load Cloud</button></div></div>
 
 <div class="card" id="jdaV150UpdateManager">
-<h3>🔐 V151 Secure Update Manager</h3>
+<h3>🔐 V152 Secure Update Manager</h3>
 <div class="notice">Internet होने पर release manifest check करें। Update से पहले local snapshot बनाया जा सकता है। नया service-worker उपलब्ध होने पर app reload करके latest hosted files लेगी।</div>
 <div class="form">
 <div><label>Current Version</label><input id="jdaV150Current" readonly></div>
@@ -641,7 +641,7 @@ input,select,textarea,button{max-width:100%;box-sizing:border-box}
 <section class="page" id="patchManager">
 <div class="pageBack"><button class="btn dark" onclick="goBack()" type="button">← Back</button></div>
 <div class="card"><h2>🛡️ JDA Secure Patch & Auto Update Manager</h2>
-<div class="notice"><b>Current:</b> <span id="patchCurrentVersion">V151</span> • Internet आने पर update check किया जा सकता है। Update से पहले local backup बनाया जाएगा। केवल HTTPS hosting पर PWA/service-worker update सुरक्षित रूप से लागू होगा।</div>
+<div class="notice"><b>Current:</b> <span id="patchCurrentVersion">V152</span> • Internet आने पर update check किया जा सकता है। Update से पहले local backup बनाया जाएगा। केवल HTTPS hosting पर PWA/service-worker update सुरक्षित रूप से लागू होगा।</div>
 <div class="form"><div><label>Patch Manifest URL (HTTPS JSON)</label><input id="patchManifestUrl" type="url" placeholder="https://your-domain.example/jda-update.json" autocomplete="off"/></div><div><label>Automatic Update</label><select id="patchAutoMode"><option value="auto">Automatic check when Internet connects</option><option value="manual">Manual only</option></select></div><div><label>Require Admin Approval</label><select id="patchRequireAdmin"><option value="yes">Yes — recommended</option><option value="no">No</option></select></div></div>
 <div class="actions"><button class="btn green" id="patchSave">💾 Save Update Settings</button><button class="btn gold" id="patchCheck">🔎 Check New Patch</button><button class="btn blue" id="patchApply">⬇️ Apply Available Patch</button><button class="btn dark" id="patchBackup">💾 Backup Before Update</button><button class="btn red" id="patchRollback">↩️ Rollback Info</button></div>
 <div class="notice" id="patchStatus">No update check performed.</div>
@@ -859,7 +859,7 @@ function openWhatsApp(number, message='') {
   return false;
 }
 
-const DB_NAME='JDA_V5_DB',STORE='media',DATA_KEY='JDA_V5_DATA',APP_VERSION='V151 • V149 FULL FEATURES + SECURE UPDATE + BACKUP';
+const DB_NAME='JDA_V5_DB',STORE='media',DATA_KEY='JDA_V5_DATA',APP_VERSION='V152 • V149 FULL FEATURES + SECURE UPDATE + BACKUP • COMPETITION START FIX';
 const SYNC_KEY='JDA_CLOUD_SYNC_CONFIG',SYNC_META_KEY='JDA_CLOUD_SYNC_META';
 const $=id=>document.getElementById(id);
 const blank={students:[],notices:[],tests:[],materials:[],attendance:{},selected:[],onlineClasses:[],vacancies:[],settings:{directorPhoto:'',backgroundPhoto:'',backgroundPhotoId:''},installments:[]};
@@ -2130,9 +2130,6 @@ async function start(){
   if(savedCount < Math.min(blueprint.q,50)) await updateCompetitionOnline();
   const targetCount=blueprint.q||+$('v63CpCount').value;
   const pool=filtered(course,$('v63CpSubject').value,$('v63CpPaper').value);
-  // Repair the actual selected pool, not just the first 80 records, so every paper question is bilingual.
-  for(const q of pool){ await ensureBilingualQuestion(q); }
-  try{ save(load()); }catch(e){}
   $('v63CpStart').disabled=false;
   if(!pool.length){$('v63CpStatus').textContent='⚠️ इस Course/Paper के लिए questions नहीं मिले। Internet ON करके फिर Start करें या local questions add करें।';return}
   let ordered=pool.slice();
@@ -2146,7 +2143,12 @@ async function start(){
   const n=Math.min(targetCount,ordered.length); cp=ordered.slice(0,n);cpI=0;cpAns=Array(n).fill(null);cpSec=(blueprint?blueprint.time:+$('v63CpTime').value)*60;
   if(!$('v63CpLang').value)$('v63CpLang').value='both';
   $('v63CpTest').style.display='block';$('v63CpResult').style.display='none';$('v63CpStatus').textContent='📝 Paper started — हर question का answer select करें और अंत में Submit करें.';
-  clearInterval(cpTimer);cpTimer=setInterval(()=>{cpSec--;if(cpSec<=0){clearInterval(cpTimer);finish()}renderCP()},1000);renderCP()
+  clearInterval(cpTimer);cpTimer=setInterval(()=>{cpSec--;if(cpSec<=0){clearInterval(cpTimer);finish()}renderCP()},1000);renderCP();
+  // Hindi translation must never block the start button. Repair the selected paper in the background.
+  Promise.all(cp.map(q=>ensureBilingualQuestion(q).catch(()=>q))).then(()=>{
+    try{ save(load()); }catch(e){}
+    if(!cpFinished){ $('v63CpStatus').textContent='📝 Paper चल रहा है — Hindi + English question data background में तैयार हो रहा है.'; renderCP(); }
+  }).catch(()=>{});
 }
 function renderCP(){
   if(!cp.length)return; $('v63CpNo').textContent=cpI+1;$('v63CpTotal').textContent=cp.length;$('v63CpTimer').textContent=String(Math.floor(cpSec/60)).padStart(2,'0')+':'+String(cpSec%60).padStart(2,'0');$('v63CpAnswered').textContent=cpAns.filter(x=>x!==null).length;
